@@ -1,0 +1,811 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    /* 
+        Kích thước mặc định là của google là: font-size: 16px -> khi đó 1 rem sẽ bằng 16px
+        --> Nhưng ở đây ta chỉ muốn là 1 rem bằng 10px thôi để dễ quản lý -> thế nên ta sẽ lấy 10 / 16 để ra được 10px 
+            chiếm bnh % trong 16px và ta đặt lại kích thước cho nó để được rằng 1rem là bằng 10px chứ ko phải là 16px
+    */
+}
+
+/* 
+    Lớp dả :root này nó sẽ trỏ tới thẻ element gốc của trang web là thẻ html vậy nên tạo biến ở trong lớp dả :root
+        hoặc trong thẻ html đều được
+*/
+:root {
+    --primary-color: #0f1b4c;
+}
+
+body {
+    font-size: 1.6rem;
+    /* 
+        Trả nó về nó về kích thước ban đầu là 16px
+        Tại vì sao:
+            +) Chúng ta đặt 1rem = 10px để khi chúng ta tằng đơn vị rem nên nó sẽ theo từng px một và sẽ dễ dàng quản lý hơn
+                là để mặc định -> nếu để mặc đinh 16px thì mỗi khi tăng 0.1rem nên nó sẽ nên hẳn là 2px mỗi lần
+    */
+    font-family: "Poppins", sans-serif;
+}
+
+/* common: thành phần dùng chung */
+.content {
+    width: 1110px;
+    /* 
+        Tạo max-width: 100% là vì khi kích thước trình duyệt rộng hơn thì ksao nhưng nếu bé hơn width đã khai báo thì nó sẽ bị che mất
+            element của chúng ta -> đặt 100% để nó phù hợp vs kích thước màn hình
+        calc(100% - 48px): là vì màn hình bé thì 2 bên element trái phải sẽ bị dính vào màn hình tạo khoảng cách margin 2 bên ra
+            mỗi bên là 24px để nhìn sẽ được đẹp hơn
+    */
+    max-width: calc(100% - 48px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    display: inline-block;
+    min-width: 98px;
+    font-size: 1.4rem;
+    padding: 18.5px 16px;
+    border-radius: 12px;
+    background: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.line-clamp {
+    display: -webkit-box;
+    /* Tức là giá trị mặc định là 2 nếu như ko được khai báo - Từ dòng số 2 sẽ có dấu 3 chấm */
+    -webkit-line-clamp: var(--line-clamp, 2);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ================== Header ==================  */
+.header {
+    position: relative;
+    background-color: #e6f0ff;
+    height: 100vh;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding-top: 38px;
+}
+
+.navbar ul {
+    display: flex;
+    margin-left: 50px;
+}
+
+.navbar ul a {
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #4f5361;
+    /* Padding cho 1 thẻ inline nó vẫn sẽ padding -> chẳng qa nó ko tạo ra sự va chạm thôi */
+    padding: 8px 14px;
+}
+
+.navbar ul a:hover {
+    text-decoration: underline;
+}
+
+.navbar .actions {
+    margin-left: auto;
+}
+
+.navbar .action-link {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-right: 18px;
+}
+
+.navbar .action-btn {
+    padding: 13px 16px;
+    border-radius: 8px;
+}
+
+.hero {
+    margin-top: 130px;
+}
+
+.hero .info {
+    /* 
+        Phần info nó chiếm 559px thì ta ko được xét cứng - ta lấy kích thước 559 / kích thước content là: 1110px xem nó chiếm bao nhiêu %
+        559 / 1110 = 50.36 có thể làm tròn nên là 51  -> suy ra xét width cho here info
+    */
+    width: 50.36%;
+}
+
+.hero .sub-titile {
+    /* line-height quy chuẩn về 1 số nào đó: quy chuẩn về px chia cho 18 */
+    line-height: 1.5;
+    color: #687690;
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.hero .title {
+    color: #000336;
+    font-size: 6.4rem;
+    font-weight: 700;
+    /* 118.75% */
+    line-height: 118.75%;
+    margin-top: 8px;
+}
+
+.hero .desc {
+    margin-top: 30px;
+    color: #5a6473;
+    font-size: 1.8rem;
+    font-weight: 400;
+    /* 177.778% : */
+    line-height: 177.778%;
+}
+
+.hero .hero-cta {
+    min-width: 170px;
+    margin-top: 40px;
+    font-size: 1.3rem;
+    border-radius: 12px;
+}
+
+.hero .hero-img {
+    /* 
+        Khi cho ảnh giữa 2 màn hình có độ kích thước khác nhau nó sẽ bị khác đi với thiết kế là vì:
+            +) Mỗi màn có độ viewport khác nhau ko giống
+            +) Hero-img: bottom = 0 thì màn hình kích thước to sẽ rộng và trôi sâu xuống - còn màn hình kích thước vừa sẽ bth
+            +) Nên để là 100vh thì khi mử nên sẽ đập thẳng vào mắt người dùng nó sẽ đẹp hơn là để 736px
+    */
+    position: absolute;
+    bottom: 0;
+    /* 
+        Đặt right 65px như thiết kế là ko chuẩn là vì:
+            +) Trong bản thiết kế ngta thiết kế với kích thước màn hình là 1440 -> rồi đoạn Content kia kích thước của nó lại là 1110 thì nó sẽ bị dư 2 bên mép trái và phải
+                là 65px với màn hình 1440
+            +) Nhưng nếu màn hình có kích thước lớn hoặc nhỏ hơn 1440 -> thì độ dư 2 bên ko còn là 65px nữa -> đặt cứng 65px sẽ là ko đúng
+            +) Khi zoom bé đi trên màn hình bth -> các phần tử sẽ bị vào và chạy -> chúng ta cũng phải khiến ảnh như vậy chứ ko phải là -> chạy ra
+            +) Khắc phục cần right bao nhiêu cho đúng:
+                100vw: là bằng full width với mọi màn hình
+                - 1110px: tức là trừ đi kích thước Content đó xem còn dư bnh kích thước trên màn hình -> là nó ra được khoảng ko bên trái và bên phải
+                /2: Khi đã có được KQ màn hình còn dư bnh kích thước -> thì chia cho 2 -> sẽ ra được khoảng dư 2 bên là bnh
+                -100px: Ý nghĩa là vì phải tính làm sao cho chân của ngồi nhà thăng với Sign Up 
+                    +) Đo mép cuối Sign Up đến cạnh màn hình là 165px
+                    +) Mép cuối của hàng rào chân ngôi nhà so với cạnh màn hình là: 65px
+                    +) Lấy 165 - 65 = 100 -> Là ra được khoảng cách ngôi nhà phải lùi về bên phải bnh px nữa
+    */
+    right: calc((100vw - 1110px) / 2 - 100px);
+}
+
+/* =========== clients =========== */
+.clients {
+    margin-top: 79px;
+    padding: 43px 0 64px;
+}
+
+.clients .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.clients p {
+    color: #7d8589;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 125%; /* 125% */
+}
+
+.clients p:nth-child(1) {
+    margin-top: 23px;
+}
+
+.clients p:nth-child(2) {
+    margin-top: 23px;
+}
+
+.clients .images {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 96px;
+}
+
+/* =========== Guides =========== */
+.guides {
+    margin-top: 40px;
+    padding: 79px 0 95px;
+}
+
+.guides .sub-title {
+    position: relative;
+    color: #000339;
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 100%; /* 100% */
+}
+
+/* Tạo ra 1 thẻ ra nằm bên trong selector này - tạo ra dấu gạch bên trên h2 */
+.guides .sub-title::before {
+    content: "";
+    display: inline-block;
+    width: 41px;
+    height: 4px;
+    top: -10px;
+    /* Tính từ mép trái cua dấu gạch chạy ra giữa thẻ chứa nó */
+    left: 50%;
+    /* Khi nó chạy ra giữa thế nó tính từ mép thì sẽ bị lệch đi -> ta phải trừ đi 1 nửa kích thước của dấu gạch để nó ra giữa được */
+    transform: translateX(-50%);
+    border-radius: 12px;
+    background: #000339;
+    position: absolute;
+}
+
+.guides .desc {
+    width: 459px;
+    /* Ngăn ngừa khi co nhỏ trình duyệt lại sẽ ko xuất hiện thanh cuộn ngang */
+    max-width: 100%;
+    color: #5a6473;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 187.5%; /* 187.5% */
+    margin: 20px auto 0;
+}
+
+.list-guide {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+
+.list-guide .guide-item {
+    margin-left: 70px;
+    margin-right: 70px;
+    text-align: center;
+}
+
+.list-guide .title {
+    margin-top: 26px;
+    color: #3b3c45;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 110%; /* 110% */
+}
+
+.list-guide .link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #0689ff;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.list-guide .arrow {
+    margin-left: 8px;
+}
+
+.guides .guides-cta {
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
+}
+
+.guides-cta .btn-guide {
+    min-width: 170px;
+    display: inline-block;
+    padding: 18px 25px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+/* =========== Feature =========== */
+.feature {
+    background-color: #f5fafe;
+    margin-top: 41px;
+    padding: 110px 0 110px;
+}
+
+.feature .sub-title {
+    color: #000339;
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 100%; /* 100% */
+}
+
+.feature .row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.feature .desc {
+    min-width: 407px;
+    color: #5a6473;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 187.5%; /* 187.5% */
+}
+
+.feature .link {
+    display: flex;
+    align-items: center;
+    color: #0689ff;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.feature .link .arrow {
+    margin-left: 8px;
+}
+
+.feature .list {
+    display: flex;
+    gap: 30px;
+    margin-top: 70px;
+}
+
+.feature .list .item {
+    width: 350px;
+    flex: 1;
+    background-color: #fff;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.feature .item .thumb {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    width: 100%;
+    height: 227px;
+    object-fit: cover;
+}
+
+.feature .item .body {
+    padding: 17px 20px 24px;
+}
+
+.feature .body a {
+    color: #000339;
+    font-size: 2rem;
+    font-weight: 600;
+    /* 
+        Lường trước được 1 điều rằng về mặt nội dung trong tương lai:
+            +) Khi ngươi dùng thêm qá nhiều chữ vào tiêu đề nó sẽ bị hỏng giao diện -> cách fix đó là -> tạo dấu 3 chấm khi nội
+                dung qá dài -> khi đó giao diện sẽ vẫn được giữ nguyên và ko bị xấu
+            +) line-height: 1.5 tức là khi tiêu đề có nhiều dòng thì với độ line-height đó thì độ giãn chữ ra vẫn đẹp
+    */
+    line-height: 1.5; /* 100% */
+    /* 
+        Tạo 3 chấm khi nội dung qá nhiều
+    */
+    /* display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden; */
+}
+
+.feature .body .desc {
+    margin-top: 11px;
+    color: #a3a6ab;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    font-weight: 500;
+
+    /* 
+        Tạo 3 chấm khi nội dung qá nhiều 
+    */
+    /* display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden; */
+
+    /* Có thể thay đổi dấu 3 chấm bất đầu xuất hiện từ dòng nào -> nhờ cách thay đổi giá trị */
+    --line-clamp: 3;
+
+    /* 
+        Ví dụ khi người dùng gắn vào đây 1 đường link hoặc viết các chữ ko có dấu nó sẽ ko có điểm break -> lúc này các chữ
+            nó sẽ bị chọc ra ngoài -> cách khắc phục ở đây là nhờ thuộc tính -> word break để nó bẻ kích thước xuống
+        work-break: break-all
+    */
+    word-break: break-all;
+}
+
+.feature .body .info {
+    margin-top: 21px;
+    display: flex;
+    align-items: center;
+}
+
+.feature .body .icon {
+    margin-left: 23px;
+}
+
+.feature .body .icon:first-child {
+    margin-left: 0;
+}
+
+.feature .body .label {
+    margin-left: 8px;
+    color: #4d4d52;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 100%; /* 100% */
+    letter-spacing: 0.14px;
+}
+
+/* =========== Stats =========== */
+.stats {
+    margin-top: 75px;
+    padding: 50px 0;
+}
+
+.stats .content {
+    width: 1048px;
+}
+
+.stats .row {
+    display: flex;
+}
+
+.stats .img-blog,
+.stats .info {
+    width: 50%;
+}
+
+.stats .img-blog {
+    position: relative;
+}
+
+.stats .info {
+    padding: 79px 0 0 165px;
+}
+
+.stats .img-blog .image {
+    display: block;
+    /* Với những ảnh nó nằm luôn trong bố cục - thì ta cứ thế lấy luôn width và height trong bản thiết kế luôn */
+    width: 400px;
+    max-width: 100%;
+    height: 460px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 40px 80px 155px 0px rgba(30, 103, 113, 0.03);
+    margin-left: auto;
+}
+
+.stats .info .sub-title {
+    position: relative;
+    width: 269px;
+    color: #000339;
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 128.571%; /* 128.571% */
+    margin-bottom: 20px;
+}
+
+.stats .info .sub-title::before {
+    position: absolute;
+    content: "";
+    display: inline-block;
+    width: 41px;
+    height: 4px;
+    left: 0;
+    top: -10px;
+    border-radius: 12px;
+    background: #000339;
+}
+
+.stats .info .desc {
+    width: 309px;
+    color: #5a6473;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 187.5%; /* 187.5% */
+}
+
+.stats .img-blog .stats-trend {
+    position: absolute;
+    width: 239px;
+    border-radius: 0px 0px 12px 12px;
+    background: #fff;
+    box-shadow: 90px 85px 100px 0px rgba(0, 0, 0, 0.06);
+    padding: 45px 22px 40px;
+    top: 0;
+    left: 0;
+}
+
+.stats .stats-trend .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stats .stats-trend .value {
+    color: #000339;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1; /* 100% */
+    letter-spacing: 0.26px;
+}
+
+.stats .stats-trend .icon {
+    width: 25.11px;
+    height: 16.034px;
+    color: #50d28a;
+}
+
+.stats .stats-trend .desc {
+    width: 194px;
+    margin-top: 8px;
+    color: #a7a7a7;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.5; /* 150% */
+}
+
+.stats .stats-trend .separate {
+    margin-top: 26px;
+    width: 193.62px;
+    height: 1.2px;
+    background: #e9e9e9;
+}
+
+.stats .stats-trend .avatar-blog {
+    margin-top: 26px;
+}
+
+.stats .avatar-blog {
+    display: flex;
+    gap: 17px 14px;
+    flex-wrap: wrap;
+}
+
+.stats .avatar-blog .avatar-group {
+    display: flex;
+}
+
+.stats .avatar-blog .avatar {
+    width: 16.337px;
+    height: 16.337px;
+    border-radius: 16.337px;
+    box-shadow: 4px 4px 16px 0px rgba(0, 0, 0, 0.1);
+    /* Lấp đầy avatar, khung hình, ko bị méo ảnh */
+    object-fit: cover;
+    /* Margin là nơi tiếp giáp cuối cùng của 1 element -> nếu nơi tiếp giáp bị trừ đi thì các element sẽ bị đè nền nhau */
+    margin-left: -3px;
+}
+
+.stats .avatar-group .avatar:first-child {
+    margin-left: 0;
+}
+
+.stats .avatar-blog .avatar-name,
+.stats .avatar-blog .avatar-name-two,
+.stats .avatar-blog .avatar-name-three,
+.stats .avatar-blog .avatar-name-for,
+.stats .avatar-blog .avatar-name-five,
+.stats .avatar-blog .avatar-name-six {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats .avatar-blog .avatar-name {
+    background-color: #1f3bb1;
+    filter: drop-shadow(4px 4px 16px rgba(0, 0, 0, 0.1));
+}
+
+.stats .avatar-blog .avatar-name-two {
+    background: #24d6d9;
+    filter: drop-shadow(4px 4px 16px rgba(0, 0, 0, 0.1));
+}
+
+.stats .avatar-blog .avatar-name-three {
+    background: #f8c120;
+    filter: drop-shadow(4px 4px 16px rgba(0, 0, 0, 0.1));
+}
+
+.stats .avatar-blog .avatar-name-for {
+    background: #f97f6b;
+    filter: drop-shadow(4px 4px 16px rgba(0, 0, 0, 0.1));
+}
+
+.stats .avatar-blog .avatar-name-five {
+    background: #73a242;
+    filter: drop-shadow(4px 4px 16px rgba(0, 0, 0, 0.1));
+}
+
+.stats .avatar-blog .avatar-name-six {
+    background: #1f3bb0;
+    filter: drop-shadow(4px 4px 16px rgba(0, 0, 0, 0.1));
+}
+
+.stats .avatar-blog span {
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 450;
+    letter-spacing: -0.145px;
+}
+
+.stats .row:nth-child(2) {
+    margin-top: 110px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stats .quantity-item .quantity-title {
+    color: #000;
+    font-size: 6.4rem;
+    font-weight: 600;
+    line-height: 1; /* 100% */
+}
+
+.stats .quantity-item .quantity-desc {
+    color: #7b8087;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 22px;
+}
+
+/* =========== Subscribe =========== */
+.subscribe {
+    margin-top: 51px;
+    background-color: #fff;
+    padding-top: 34px;
+}
+
+.subscribe .body {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 370px;
+    background-color: #063183;
+    border-radius: 20px;
+}
+
+.subscribe .body .info {
+    margin-left: 80px;
+    /* 
+        Khắc phục nếu thêm nội dung chữ nhiều qá sẽ chọc ra ngoài cả ảnh
+        --> Ta đo xem từ bên trái ảnh đến cạnh kia là bnh px xong giới hạn cho info có độ dài như vậy
+    */
+    width: 671px;
+    max-width: 100%;
+}
+
+.subscribe .body .sub-title {
+    color: #fff;
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 1; /* 100% */
+}
+
+.subscribe .body .desc {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 187.5%; /* 187.5% */
+    opacity: 0.75;
+    margin-top: 15px;
+    --line-clamp: 3;
+}
+
+.subscribe .body .subscribe-btn {
+    min-width: 151px;
+    background: #fff;
+    color: #002366;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.subscribe .body .picture {
+    position: absolute;
+    bottom: 0;
+}
+
+/* =========== Footer =========== */
+.footer {
+    margin-top: 55px;
+    padding: 50px 0 58px;
+}
+
+.footer .row {
+    display: flex;
+}
+
+.footer .row-top {
+    gap: 185px;
+}
+
+.footer .row .heading {
+    font-family: "Lato", sans-serif;
+    color: #1c1c1d;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.footer .row .list,
+.footer .row .desc {
+    margin-top: 42px;
+}
+
+.footer .row .item {
+    margin-top: 18px;
+}
+
+.footer .row .item:first-child {
+    margin-top: 0;
+}
+
+.footer .item a {
+    color: #7a7a7e;
+    font-size: 1.6rem;
+    font-weight: 400;
+    /* 
+        Do chúng ta chưa đặt width cho nó vậy nên từ nào dài nhất nó sẽ đặt làm width mặc định -> xong các từ nào có độ dài nhiều hơn nó sẽ 
+            bị bẻ xuống hàng -> khắc phục nó bằng white-space: ko cho nó bẻ xuống hàng
+    */
+    white-space: nowrap;
+}
+
+.footer .row .desc {
+    color: #7a7a7e;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.75; /* 175% */
+    margin-bottom: 40px;
+}
+
+.footer .row .social {
+    display: flex;
+    align-items: center;
+}
+
+.footer .social .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 3px;
+}
+
+.footer .social .social-link:hover {
+    background-color: #ebebeb;
+}
+
+.footer .row:last-child {
+    margin-top: 81px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer .row:last-child .copyright {
+    color: #c2c2c2;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
