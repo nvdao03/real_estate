@@ -9,6 +9,18 @@ html {
         --> Nhưng ở đây ta chỉ muốn là 1 rem bằng 10px thôi để dễ quản lý -> thế nên ta sẽ lấy 10 / 16 để ra được 10px 
             chiếm bnh % trong 16px và ta đặt lại kích thước cho nó để được rằng 1rem là bằng 10px chứ ko phải là 16px
     */
+
+    /* 
+        scrool: cuộn
+        bahavion: hành vi
+        smooth: mượt
+    */
+}
+
+html,
+body {
+    /* Mỗi trình duyệt, phiên ản khác nhau nó có thể xuất hiện thanh cuộn khác nhau vậy nên cứ để trong 2 thẻ sẽ tốt hơn */
+    scroll-behavior: smooth;
 }
 
 main {
