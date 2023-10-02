@@ -92,7 +92,8 @@ a {
 .hero-wrap {
     position: relative;
     background-color: #e6f0ff;
-    height: 100vh;
+    /* sửa lại chân ngôi nhà ko nằm đúng dưới đáy nữa là do thằng fix-header cao tận 90px nó đẩy thằng này xuống */
+    height: calc(100vh - 90px);
 }
 
 .navbar {
