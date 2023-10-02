@@ -791,6 +791,12 @@ a {
     width: 28px;
     height: 28px;
     border-radius: 3px;
+    background: #f9f9f9;
+}
+
+/* Tác động từ thẻ link thứ 2 trở đi */
+.footer .social .social-link + .social-link {
+    margin-left: 16px;
 }
 
 .footer .social .social-link:hover {
