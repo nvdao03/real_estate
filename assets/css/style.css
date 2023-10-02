@@ -11,6 +11,10 @@ html {
     */
 }
 
+main {
+    overflow: hidden;
+}
+
 /* 
     Lớp dả :root này nó sẽ trỏ tới thẻ element gốc của trang web là thẻ html vậy nên tạo biến ở trong lớp dả :root
         hoặc trong thẻ html đều được
@@ -72,8 +76,20 @@ a {
     overflow: hidden;
 }
 
+/* ================== PC Header ==================  */
+.fixed-header {
+    background-color: #e6f0ff;
+    /* khoảng 6px là khoảng bù lại ban đầu của nav đi nên trên là: 28px cơ */
+    padding-top: 26px;
+    /* Nó sẽ cuộn theo thẻ cha của nó */
+    position: sticky;
+    z-index: 1;
+    /* -26px để nó có thể bám dính sát mép bên trên - tại vì bên trên là nó có khoảng đệm 26px */
+    top: -26px;
+}
+
 /* ================== Header ==================  */
-.header {
+.hero-wrap {
     position: relative;
     background-color: #e6f0ff;
     height: 100vh;
@@ -82,7 +98,8 @@ a {
 .navbar {
     display: flex;
     align-items: center;
-    padding-top: 38px;
+    /* padding-top: 38px; */
+    padding: 12px 0;
 }
 
 .navbar ul {
@@ -119,7 +136,7 @@ a {
 }
 
 .hero {
-    margin-top: 130px;
+    padding-top: 130px;
 }
 
 .hero .info {
