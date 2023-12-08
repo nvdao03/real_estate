@@ -12,6 +12,7 @@
 /* Tablet and Mobile */
 /* Phải có thêm 1 cái là vì: Tablet và Mobile có nhiều điểm chung. Tránh lặp lại code nhiều lần */
 @media screen and (max-width: 991.98px) {
+    /* Navbar */
     .navbar {
         position: relative;
     }
@@ -77,6 +78,43 @@
     .separate {
         border-top: 1.5px solid #ebebeb;
     }
+
+    /* Hero */
+    .hero .hero-img {
+        display: none;
+    }
+
+    .hero .info {
+        width: 80%;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .hero .desc {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .spacing-tablet {
+        padding: 0 37px;
+    }
+
+    .clients .images {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Works */
+    .list-guide .guide-item {
+        margin: 0;
+        flex: 1;
+    }
+
+    /* Features */
+    .feature .list {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* Tablet */
@@ -88,6 +126,7 @@
 
 /* Mobile */
 @media screen and (max-width: 767.98px) {
+    /* Navbar */
     .menu-drawer {
         padding: 40px;
         inset: 0 25% 0 0;
