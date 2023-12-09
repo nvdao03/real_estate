@@ -187,4 +187,90 @@
     .navbar .actions {
         display: none;
     }
+
+    /* Hero */
+    .hero-wrap {
+        height: calc(100vh - 80px);
+    }
+
+    .hero .title {
+        margin-top: 20px;
+        font-size: 5.2rem;
+    }
+
+    .hero .desc {
+        width: 100%;
+    }
+
+    .hide-on-monile {
+        display: none;
+    }
+
+    .clients .images {
+        row-gap: 50px;
+    }
+
+    /* Guides */
+    .list-guide {
+        flex-direction: column;
+        row-gap: 60px;
+    }
+
+    /* Features */
+    .feature .desc {
+        width: 407px;
+    }
+
+    .feature .link {
+        display: none;
+    }
+
+    .feature .list {
+        grid-template-columns: 1fr;
+    }
+
+    .feature .view-all {
+        display: flex;
+        justify-content: center;
+        margin-top: 60px;
+    }
+
+    /* resources */
+    .stats .img-blog .image {
+        width: 100%;
+    }
+
+    .stats .img-blog .stats-trend {
+        top: 20px;
+        left: 20px;
+        border-radius: 12px;
+    }
+
+    /* Stats */
+    .stats .row-qty {
+        flex-direction: column;
+        align-items: center;
+        row-gap: 60px;
+    }
+
+    /* News */
+    .subscribe .body {
+        padding: 130px 0;
+    }
+
+    .subscribe .body .info {
+        margin-left: 40px;
+    }
+
+    /* Footer */
+    .footer .row-top {
+        grid-template-columns: 1fr;
+    }
+
+    /*  Contact */
+    #contact .row-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 24px;
+    }
 }

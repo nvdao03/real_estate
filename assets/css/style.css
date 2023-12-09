@@ -374,7 +374,7 @@ a {
 }
 
 .feature .desc {
-    min-width: 407px;
+    width: 407px;
     color: #5a6473;
     font-size: 1.6rem;
     font-weight: 400;
